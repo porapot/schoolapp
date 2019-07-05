@@ -1,3 +1,4 @@
+import { AddStudentDialogComponent } from './../add-student-dialog/add-student-dialog.component';
 import {
   MatButtonModule,
   MatCheckboxModule,
@@ -7,7 +8,8 @@ import {
   MatCardModule,
   MatStepperModule,
   MatMenuModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDialogModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 
@@ -21,7 +23,8 @@ import { NgModule } from "@angular/core";
     MatCardModule,
     MatStepperModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -32,7 +35,8 @@ import { NgModule } from "@angular/core";
     MatCardModule,
     MatStepperModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

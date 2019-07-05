@@ -16,6 +16,7 @@ import { HeaderToolbarComponent } from "./components/header-toolbar/header-toolb
 import { environment } from "src/environments/environment";
 import { AuthModule } from "ng6-md-auth";
 import { StudentListComponent } from './student-list/student-list.component';
+import { AddStudentDialogComponent } from './add-student-dialog/add-student-dialog.component';
 
 
 const apiSrvCfg = environment;
@@ -27,7 +28,8 @@ const apiSrvCfg = environment;
     RegisterComponent,
     ForgotComponent,
     HeaderToolbarComponent,
-    StudentListComponent
+    StudentListComponent,
+    AddStudentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,9 @@ const apiSrvCfg = environment;
     NgxSpinnerModule,
     AuthModule.forRoot(apiSrvCfg)
   ],
+
+  entryComponents: [AddStudentDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
