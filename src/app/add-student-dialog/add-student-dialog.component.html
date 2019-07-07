@@ -1,7 +1,67 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'เพิ่มข้อมูลนักเรียน' : 'Disable linear mode'}}
-</button>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-  
-</mat-horizontal-stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <div mat-dialog-content>
+        <p>
+          ตรวจสอบให้แน่ใจว่าคุณได้ทำการสแกนเอกสารข้อมูลของนักเรียนที่สมัครเรียบร้อยแล้ว ใช่ หรือ ไม่ หากใช่ให้กดปุ่ม
+          "ใช่"
+          เพื่อดำเนินการต่อ หากไม่ได้สแกน ให้กดปุ่ม "ไม่" เพื่อออกจากหน้านี้
+        </p>
+      </div>
+      <div>
+        <button mat-button (click)="close()" color="Primary">ไม่ </button>
+        <button mat-button matStepperNext color="Secondary">ใช่</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <div class="container">
+        <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลด ไฟล์สูติบัตร</p>
+        <button md-raised-button color="primary" (click)="fileInput.click()">เพิ่มไฟล์</button>
+        <input hidden type="file" #fileInput>
+      </div>
 
+      <div>
+        <button mat-button matStepperPrevious>ย้อนกลับ</button>
+        <button mat-button matStepperNext>ต่อไป</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    
+    <div class="container">
+        <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลดไฟล์</p>
+        <br>
+        <br>
+        <p>ทะเบียนบ้าน</p>
+        <br>
+        <p>สำเนาบัตรประชาชน</p>
+        <button md-raised-button color="primary" (click)="fileInput.click()">เพิ่มไฟล์</button>
+        <input hidden type="file" #fileInput>
+      </div>
+
+
+
+
+
+    <div>
+      <button mat-button matStepperPrevious>ย้อนกลับ</button>
+      <button mat-button matStepperNext>ต่อไป</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+
+
+
+
+
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

@@ -1,3 +1,4 @@
+
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
@@ -17,6 +18,8 @@ import { environment } from "src/environments/environment";
 import { AuthModule } from "ng6-md-auth";
 import { StudentListComponent } from './student-list/student-list.component';
 import { AddStudentDialogComponent } from './add-student-dialog/add-student-dialog.component';
+import { MatButtonModule } from "@angular/material";
+
 
 
 const apiSrvCfg = environment;
@@ -29,13 +32,16 @@ const apiSrvCfg = environment;
     ForgotComponent,
     HeaderToolbarComponent,
     StudentListComponent,
-    AddStudentDialogComponent
+    AddStudentDialogComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatButtonModule,
+
     FormsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     HttpClientModule,
