@@ -1,6 +1,8 @@
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-horizontal-stepper [linear]="isLinear" #stepper (selectionChange)="selectionChange($event)">
+
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>ตรวจสอบ</ng-template>
       <div mat-dialog-content>
         <p>
           ตรวจสอบให้แน่ใจว่าคุณได้ทำการสแกนเอกสารข้อมูลของนักเรียนที่สมัครเรียบร้อยแล้ว ใช่ หรือ ไม่ หากใช่ให้กดปุ่ม
@@ -9,59 +11,181 @@
         </p>
       </div>
       <div>
-        <button mat-button (click)="close()" color="Primary">ไม่ </button>
-        <button mat-button matStepperNext color="Secondary">ใช่</button>
+        <button mat-flat-button color="warn" (click)="close()">ไม่ </button>
+        <button mat-flat-button color="primary" matStepperNext class="example-form2">ใช่</button>
       </div>
     </form>
+
+
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <div class="container">
+      <ng-template matStepLabel>เลือกไฟล์สูติบัตร</ng-template>
+      <div class="cl">
         <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลด ไฟล์สูติบัตร</p>
-        <button md-raised-button color="primary" (click)="fileInput.click()">เพิ่มไฟล์</button>
-        <input hidden type="file" #fileInput>
+        <button mat-stroked-button color="disabled" (click)="fileInput.click()">+เพิ่มไฟล์</button>
+        <div> {{fileSelected}} </div>
+        <input hidden type="file" #fileInput (change)="detectFiles($event)">
       </div>
-
       <div>
-        <button mat-button matStepperPrevious>ย้อนกลับ</button>
-        <button mat-button matStepperNext>ต่อไป</button>
+        <button mat-flat-button color="warn" matStepperPrevious>ย้อนกลับ</button>
+        <button mat-flat-button color="primary" matStepperNext class="example-form4">ต่อไป</button>
       </div>
     </form>
   </mat-step>
 
+  
   <mat-step>
-    
-    <div class="container">
-        <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลดไฟล์</p>
-        <br>
-        <br>
-        <p>ทะเบียนบ้าน</p>
-        <br>
-        <p>สำเนาบัตรประชาชน</p>
-        <button md-raised-button color="primary" (click)="fileInput.click()">เพิ่มไฟล์</button>
-        <input hidden type="file" #fileInput>
+    <ng-template matStepLabel>แสดงข้อมูลสูติบัตร</ng-template>
+    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+      <div class="row mt-5">
+        <div class="col-6">
+          <mat-card class="example-card">
+            <img mat-card-image src="/src/assets/Capture.jpg">
+          </mat-card>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.id">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ชื่อ-สกุล" [(ngModel)]="studentdata.fullname">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="เพศ" [(ngModel)]="studentdata.sex">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="วัน/เดือน/ปีเกิด" [(ngModel)]="studentdata.birthday">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="สถานที่เกิด" [(ngModel)]="studentdata.birthdayplace">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="เป็นบุตรลำดับที่" [(ngModel)]="studentdata.sonorder">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ผู้ทำคลอด" [(ngModel)]="studentdata.pediatrician">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="น้ำหนักแรกเกิด" [(ngModel)]="studentdata.birthweight">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ชื่อ-สกุลบิดา" [(ngModel)]="studentdata.fatherfullname">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.fatherid">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ชื่อ-สกุลมารดา" [(ngModel)]="studentdata.matherfullname">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.matherid">
+          </mat-form-field>
+          <mat-spinner class="spinner-doc" *ngIf="isshow">รอสักครู่กำลังทำการอ่านไฟล์ข้อมูล</mat-spinner>
+        </div>
       </div>
+      <div>
+        <button mat-flat-button color="warn" matStepperPrevious>ย้อนกลับ</button>
+        <button mat-flat-button color="primary" matStepperNext class="example-form2">ต่อไป</button>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </mat-step>
 
 
 
-
-
+  <mat-step>
+    <ng-template matStepLabel>เลือกไฟล์เอกสารประกอบการสมัครอื่นๆ</ng-template>
+    <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลดไฟล์</p>
+    <div class="container">
+      <button class="uploadbtn1" mat-stroked-button color="disabled" (click)="fileInput.click()">อัพโหลดไฟล์</button>
+      <input hidden type="file" #fileInput2 multiple>
+    </div>
+    <div class="center">
+      โปรดอัพโหลดไฟล์ที่เหลือให้ครบถ้วนตามรายการ
+    </div>
+    <div *ngFor="let item of filesMulti">
+      {{item.name}}
+    </div>
     <div>
-      <button mat-button matStepperPrevious>ย้อนกลับ</button>
-      <button mat-button matStepperNext>ต่อไป</button>
+      <button mat-flat-button color="warn" matStepperPrevious>ย้อนกลับ</button>
+      <button mat-flat-button color="primary" matStepperNext class="example-form2">ต่อไป</button>
     </div>
   </mat-step>
+
+
+
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-
-
-
-
-
-
+    <ng-template matStepLabel>บันทึก</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.id">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="ชื่อ-สกุล" [(ngModel)]="studentdata.fullname">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="เพศ" [(ngModel)]="studentdata.sex">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="วัน/เดือน/ปีเกิด" [(ngModel)]="studentdata.birthday">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="สถานที่เกิด" [(ngModel)]="studentdata.birthdayplace">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="เป็นบุตรลำดับที่" [(ngModel)]="studentdata.sonorder">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="ผู้ทำคลอด" [(ngModel)]="studentdata.pediatrician">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="น้ำหนักแรกเกิด" [(ngModel)]="studentdata.birthweight">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="ชื่อ-สกุลบิดา" [(ngModel)]="studentdata.fatherfullname">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.fatherid">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="ชื่อ-สกุลมารดา" [(ngModel)]="studentdata.matherfullname">
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.matherid">
+      </mat-form-field>
+    </div>
+    <div class="center">
+      ไฟล์ที่อัพโหลดเพิ่มเติม
+    </div>
+    <div *ngFor="let item of filesMulti">
+      {{item.name}}
+    </div>
+    <div>
+      <button mat-flat-button color="warn" matStepperPrevious>ย้อนกลับ</button>
+      <button mat-flat-button color="primary" matStepperPrevious (click)="close()"
+        class="example-form4">เสร็จสิ้น</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

@@ -19,6 +19,8 @@ import { AuthModule } from "ng6-md-auth";
 import { StudentListComponent } from './student-list/student-list.component';
 import { AddStudentDialogComponent } from './add-student-dialog/add-student-dialog.component';
 import { MatButtonModule } from "@angular/material";
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -41,7 +43,9 @@ const apiSrvCfg = environment;
     BrowserAnimationsModule,
     MaterialModule,
     MatButtonModule,
-
+    ScrollDispatchModule,
+    MatProgressSpinnerModule,
+   
     FormsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     HttpClientModule,

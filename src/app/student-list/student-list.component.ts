@@ -24,13 +24,17 @@ export class StudentListComponent implements OnInit {
   }
   addStudent() {
     this.students.push({
-      fullname: "Teera tublit",
-      telno: "0638269546"
+      fullname: "ธีระ ทับฤทธิ์",
+      id:"1104200754859",
+      telno: "0638269546",
+      status: "..."
+
+
     });
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddStudentDialogComponent, {
-      width: '800px'
+      width: '1000px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
