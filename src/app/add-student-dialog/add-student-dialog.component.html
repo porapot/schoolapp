@@ -7,11 +7,11 @@
         <p>
           ตรวจสอบให้แน่ใจว่าคุณได้ทำการสแกนเอกสารข้อมูลของนักเรียนที่สมัครเรียบร้อยแล้ว ใช่ หรือ ไม่ หากใช่ให้กดปุ่ม
           "ใช่"
-          เพื่อดำเนินการต่อ หากไม่ได้สแกน ให้กดปุ่ม "ไม่" เพื่อออกจากหน้านี้
+          เพื่อดำเนินการต่อ หากไม่ได้สแกน ให้กดปุ่ม "ไม่" 
         </p>
       </div>
       <div>
-        <button mat-flat-button color="warn" (click)="close()">ไม่ </button>
+        <button mat-flat-button color="warn" >ไม่ </button>
         <button mat-flat-button color="primary" matStepperNext class="example-form2">ใช่</button>
       </div>
     </form>
@@ -34,7 +34,7 @@
     </form>
   </mat-step>
 
-  
+
   <mat-step>
     <ng-template matStepLabel>แสดงข้อมูลสูติบัตร</ng-template>
     <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
@@ -44,7 +44,7 @@
             <img mat-card-image src="/src/assets/Capture.jpg">
           </mat-card>
         </div>
-        <div class="col-6">
+        <div class="col-6" *ngIf="!isshow">
           <mat-form-field class="example-full-width">
             <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.id">
           </mat-form-field>
@@ -92,9 +92,15 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="เลขบัตรประชาชน" [(ngModel)]="studentdata.matherid">
           </mat-form-field>
+        </div>
+
+        <div class="spinner-doc2" *ngIf="isshow"> รอสักครู่ กำลังอ่านข้อมูลจากไฟล์ "{{fileSelected}}"
           <mat-spinner class="spinner-doc" *ngIf="isshow"></mat-spinner>
         </div>
+
+
       </div>
+
       <div>
         <button mat-flat-button color="warn" matStepperPrevious>ย้อนกลับ</button>
         <button mat-flat-button color="primary" matStepperNext class="example-form2">ต่อไป</button>
@@ -108,8 +114,8 @@
     <ng-template matStepLabel>เลือกไฟล์เอกสารประกอบการสมัครอื่นๆ</ng-template>
     <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลดไฟล์</p>
     <div class="container">
-      <button class="uploadbtn1" mat-stroked-button color="disabled" (click)="fileInput.click()">อัพโหลดไฟล์</button>
-      <input hidden type="file" #fileInput2 multiple>
+      <button class="uploadbtn1" mat-stroked-button color="disabled" (click)="fileInput2.click()">อัพโหลดไฟล์</button>
+      <input hidden type="file" #fileInput2 multiple (change)="detectFiles2($event)">
     </div>
     <div class="center">
       โปรดอัพโหลดไฟล์ที่เหลือให้ครบถ้วนตามรายการ
