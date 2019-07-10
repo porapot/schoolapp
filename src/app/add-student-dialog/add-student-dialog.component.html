@@ -114,7 +114,7 @@
     <ng-template matStepLabel>เลือกไฟล์เอกสารอื่นๆประกอบการสมัคร</ng-template>
     <p>กดปุ่มเพิ่มไฟล์เพื่ออัปโหลดไฟล์</p>
     <div class="container">
-      <button class="uploadbtn1" mat-stroked-button color="disabled" (click)="fileInput2.click()">อัปโหลดไฟล์</button>
+      <button class="uploadbtn1" mat-stroked-button color="disabled" (click)="fileInput2.click()">เพิ่มไฟล์</button>
       <input hidden type="file" #fileInput2 multiple (change)="detectFiles2($event)">
     </div>
     <div class="center">
@@ -191,7 +191,7 @@
     <div>
       <button mat-flat-button color="warn" matStepperPrevious>ย้อนกลับ</button>
       <button mat-flat-button color="primary" matStepperPrevious (click)="close()"
-        class="example-form4">เสร็จสิ้น</button>
+        class="example-form4">บันทึก</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
