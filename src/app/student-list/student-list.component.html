@@ -3,15 +3,15 @@
 <br>
 <br>
 <div style="margin: center;">
-  <button (click)="openDialog()" mat-flat-button color="primary" >+ เพิ่มข้อมูลนักเรียน</button>
+  <button (click)="openDialog()" mat-flat-button color="primary">+ เพิ่มข้อมูลนักเรียน</button>
 </div>
 <div class="row" *ngIf="students.length === 0">
-  
+
 </div>
 
 <div class="row" *ngIf="students.length > 0">
   <div class="col-12">
-  
+
 
     <div class="row mt-5 ">
       <div class="col-2">ชื่อ-สกุล</div>
@@ -19,19 +19,25 @@
       <div class="col-2">เบอร์โทร</div>
       <div class="col-2">สถานะการสมัคร</div>
       <div class="col-2" style="font-display: center;">การจัดการ</div>
-     
+
     </div>
     <div class="row mt-2" *ngFor="let students of students">
       <div class="col-2">{{students.fullname}}</div>
       <div class="col-2">{{students.id}}</div>
       <div class="col-2">{{students.telno}}</div>
-      <div class="col-2">{{students.status}}</div>
-      <div class="col-4"> 
+      <div class="col-2">
+        <mat-select>
+          <mat-option *ngFor="let status of statuss" [value]="status.value">
+            {{status.viewValue}}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="col-4">
         <div>
-            <button mat-flat-button color="warn" >แก้ไข</button>
-            <button mat-flat-button color="primary" >ดาวน์โหลด</button>
+          <button mat-flat-button color="warn">แก้ไข</button>
+          <button mat-flat-button color="primary">ดาวน์โหลด</button>
         </div>
-       </div>
+      </div>
     </div>
   </div>
 </div>

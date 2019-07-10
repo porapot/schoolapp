@@ -21,6 +21,7 @@ import { AddStudentDialogComponent } from './add-student-dialog/add-student-dial
 import { MatButtonModule } from "@angular/material";
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -45,6 +46,7 @@ const apiSrvCfg = environment;
     MatButtonModule,
     ScrollDispatchModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
    
     FormsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
