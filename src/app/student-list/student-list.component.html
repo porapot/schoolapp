@@ -13,7 +13,7 @@
   <div class="col-12">
 
 
-    <div class="row mt-5 ">
+    <div class="row mt-5 border-bottom" >
       <div class="col-2">ชื่อ-สกุล</div>
       <div class="col-2">เลขบัตรประชาชน</div>
       <div class="col-2">เบอร์โทร</div>
@@ -21,7 +21,7 @@
       <div class="col-2" style="font-display: center;">การจัดการ</div>
 
     </div>
-    <div class="row mt-2" *ngFor="let students of students">
+    <div class="row mt-2 border-bottom" *ngFor="let students of students">
       <div class="col-2">{{students.fullname}}</div>
       <div class="col-2">{{students.id}}</div>
       <div class="col-2">{{students.telno}}</div>
